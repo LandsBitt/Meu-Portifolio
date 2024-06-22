@@ -396,9 +396,9 @@ footer{
     .nav{
         display: none;
     }
-    .nav-responsive{
+    /* .nav-responsive{
         display: block;
-    }
+    } */
     
     .nav-responsive a{
         display: block;
