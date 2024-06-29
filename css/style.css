@@ -221,7 +221,7 @@ span{
 }
 .portfolio-box img{
     width: 100%;
-    transition: 0.5 ease;
+    transition: 0.5s ease;
 }
 .portfolio-box img:hover{
     transform: scale(1.1);
