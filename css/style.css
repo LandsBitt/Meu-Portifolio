@@ -19,6 +19,14 @@
     --color-05: #232323;
 
 }
+/* AOS Styles */
+[data-aos] {
+    opacity: 0; /* Elementos começam invisíveis */
+    transition-property: transform, opacity; /* Garante transições suaves */
+}
+[data-aos].aos-animate {
+    opacity: 1; /* Torna visível quando animado */
+}
 
 * {
     margin: 0;
@@ -38,6 +46,7 @@ html{
 body{
     background-color: var(--bg-color-01);
     color: var(--text-color);
+    overflow-x: hidden;
 }
 
 header{
@@ -169,17 +178,15 @@ span{
 }
 
 
-.services-box{
+.services-box {
     padding: 2rem 1rem 2.5rem;
     border-radius: 1.2rem;
     text-align: center;
     border: solid 0.15rem var(--bg-color-01);
     background-color: var(--bg-color-02);
-    transition: 0.5s ease;
-
+    transition: transform 0.5s ease, border-color 0.5s ease; /* Especifica propriedades */
 }
-
-.services-box:hover{
+.services-box:hover {
     border-color: var(--main-color);
     transform: scale(1.01);
 }
@@ -219,14 +226,14 @@ span{
     overflow: hidden;
     display: flex;
 }
-.portfolio-box img{
+.portfolio-box img {
     width: 100%;
-    transition: 0.5s ease;
+    transition: transform 0.5s ease; /* Especifica apenas para a imagem */
 }
 .portfolio-box img:hover{
     transform: scale(1.1);
 }
-.portfolio-box .portfolio-layer{
+.portfolio-box .portfolio-layer {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -239,9 +246,8 @@ span{
     align-items: center;
     text-align: center;
     padding: 0 4rem;
-    transform: translateY(50rem);
-    transition: 0.5s ease;
-
+    transform: translateY(100%); /* Começa fora da tela */
+    transition: transform 0.5s ease; /* Transição apenas para hover */
 }
 
 .portfolio-box:hover .portfolio-layer{

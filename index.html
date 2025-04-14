@@ -12,6 +12,8 @@
     <link rel="preload" href="Imagens/Perfil.png" as="image">
     <!-- Box Icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- custom css -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -49,7 +51,7 @@
     </header>
     <!-- home section -->
     <section class="home" id="home">
-        <div class="home-content">
+        <div class="home-content" data-aos="fade-right" data-aos-delay="300">
             <h3>Olá,sou</h3>
             <h1>Roland dos Santos</h1>
             <h3>Técnico de <span>Montagem e manutenção de Computadores</span> e Graduando em 
@@ -73,7 +75,7 @@
 
         </div>
 
-        <div class="home-img">
+        <div class="home-img" data-aos="fade-left" data-aos-delay="350">
             <img src="Imagens/Perfil.png" alt="Profile Picture">
         </div>
 
@@ -85,7 +87,7 @@
         <h2>Meus <span>Serviços</span>
         </h2>
         <div class="services-container">
-            <div class="services-box">
+            <div class="services-box" data-aos="zoom-in" data-aos-delay="100">
                 <i class='bx bx-server'></i>
                 <h3>Desenvolvedor Back-End</h3>
                 <p>
@@ -94,7 +96,7 @@
                 <!-- <a href="#" class="btn">Read More</a> -->
 
             </div>
-            <div class="services-box">
+            <div class="services-box" data-aos="zoom-in" data-aos-delay="200">
                 <i class='bx bx-code-curly'></i>
                 <h3>Desenvolvedor Front-End</h3>
                 <p>
@@ -103,7 +105,7 @@
                 <!-- <a href="#" class="btn">Read More</a> -->
 
             </div>
-            <div class="services-box">
+            <div class="services-box" data-aos="zoom-in" data-aos-delay="300">
                 <i class='bx bx-wrench'></i>
                 <h3>Montagem e manutenção</h3>
                 <p>
@@ -126,7 +128,7 @@
         <div class="portfolio-container">
     
             <!-- Projeto 1 -->
-            <div class="portfolio-box">
+            <div class="portfolio-box" data-aos="zoom-in" data-aos-delay="100">
                 <img src="Imagens/01.jpg" alt="Montagem de PC">
                 <div class="portfolio-layer">
                     <h4>Montagem de Computador Personalizado</h4>
@@ -137,10 +139,10 @@
             </div>
     
             <!-- Projeto 2 -->
-            <div class="portfolio-box">
+            <div class="portfolio-box" data-aos="zoom-in" data-aos-delay="200">
                 <img src="Imagens/02.png" alt="Site Oficina Box23">
                 <div class="portfolio-layer">
-                    <h4>Site Institucional – Oficina Box23</h4>
+                    <h4>Oficina Box23</h4>
                     <p>
                         Desenvolvi um site responsivo para a Oficina Box23, com layout moderno e objetivo. O projeto foi feito com HTML, CSS e JavaScript, priorizando clareza na apresentação dos serviços e compatibilidade com dispositivos móveis.
                     </p>
@@ -149,7 +151,7 @@
             </div>
     
             <!-- Projeto 3 -->
-            <div class="portfolio-box">
+            <div class="portfolio-box" data-aos="zoom-in" data-aos-delay="300">
                 <img src="Imagens/03.jpg" alt="Projeto futuro">
                 <div class="portfolio-layer">
                     <h4>Projeto em Desenvolvimento</h4>
@@ -160,7 +162,7 @@
             </div>
     
             <!-- Projeto 4 -->
-            <div class="portfolio-box">
+            <div class="portfolio-box" data-aos="zoom-in" data-aos-delay="400">
                 <img src="Imagens/04.jpg" alt="Projeto futuro">
                 <div class="portfolio-layer">
                     <h4>Protótipo Front-End</h4>
@@ -171,7 +173,7 @@
             </div>
     
             <!-- Projeto 5 -->
-            <div class="portfolio-box">
+            <div class="portfolio-box" data-aos="zoom-in" data-aos-delay="500">
                 <img src="Imagens/05.jpg" alt="Projeto futuro">
                 <div class="portfolio-layer">
                     <h4>Dashboard Administrativo (em breve)</h4>
@@ -182,7 +184,7 @@
             </div>
     
             <!-- Projeto 6 -->
-            <div class="portfolio-box">
+            <div class="portfolio-box" data-aos="zoom-in" data-aos-delay="600">
                 <img src="Imagens/06.jpg" alt="Projeto futuro">
                 <div class="portfolio-layer">
                     <h4>Sistema de Biblioteca (em breve)</h4>
@@ -219,7 +221,7 @@
 
     <!-- contact section -->
     <section class="contact" id="contact">
-        <h2><span>Entre</span> em Contato</h2>
+        <h2 data-aos="fade-up">Entre em <span>Contato</span></h2>
     
         <form action="#" method="post">
             <div class="input-box">
@@ -238,10 +240,10 @@
 
     <!-- about section -->
     <section class="about" id="about">
-        <div class="about-img">
+        <div class="about-img" data-aos="fade-right" data-aos-delay="100">
             <img src="Imagens/Perfil.png" alt="Sobre mim">
         </div>
-        <div class="about-content">
+        <div class="about-content" data-aos="fade-left" data-aos-delay="300">
             <h3>Sobre mim</h3>
             <h1>Estudante de <span>Análise e Desenvolvimento de Sistemas</span></h1>
             <p>
@@ -254,7 +256,9 @@
     <footer>
         <p>&copy; 2025 | <span style="color: var(--main-color)">&lt;/Roland&gt;</span> — Portfólio Pessoal</p>
     </footer>
-    
+
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/script.js"></script>
 </body>
 
