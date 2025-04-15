@@ -60,6 +60,7 @@ header{
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    box-shadow: 0 0 5px #4d586e;
 
     /* border: solid 1px var(--color-02); */
 
