@@ -478,18 +478,234 @@ form .input-box input, form textarea{
     
 }
 
-form textarea{
-    resize: none;
+/* Estilo do Footer */
+.footer {
+    background-color: #121212;
+    padding: 2rem 5%;
+    position: relative;
+    color: white;
+    border-top: 2px solid var(--main-color);
 }
 
-footer{
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajustando o minmax para caber mais uma coluna */
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--main-color);
+}
+
+/* Logo no Footer */
+
+.footer-logo img {
+    width: 130px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Links de Navegação no Footer */
+.footer-links h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+    color: var(--main-color);
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.0rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--main-color);
+}
+
+/* Contato Rápido no Footer */
+.footer-contact h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--main-color);
+}
+
+.footer-contact p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 0.3rem;
     display: flex;
-    flex-direction: row;
+    align-items: center;
+}
+
+.footer-contact i {
+    color: var(--main-color);
+    margin-right: 0.6rem;
+    font-size: 1rem;
+}
+
+/* Redes Sociais no Footer */
+.footer-social h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--main-color);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+
+.social-icons a {
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 1.2rem;
-    background-color: var(--bg-color-01);
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: solid 0.15rem var(--main-color);
+    border-radius: 50%;
+    font-size: 2rem;
+    color: var(--main-color);
+    margin: 1.8rem 0.5rem;
+    transition: 0.5s ease;
 }
+
+.social-icons a:hover {
+    background-color: var(--main-color);
+    color: var(--bg-color-02);
+    box-shadow: 0 0 0.3rem var(--main-color);
+}
+
+.social-icons i {
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+.social-icons a:hover i {
+    color: #121212;
+}
+
+.footer__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: var(--spacing);
+  }
+  
+  .footer__copyright,
+  .footer__credit {
+    font-size: 0.875rem; /* 14px */
+    color: var(--text-color);
+    margin: 0.25rem 0;
+    line-height: 1.5;
+  }
+  
+  .footer__link {
+    color: var(--main-color);
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px; /* Espaço para o underline */
+    transition: color 0.2s ease;
+  }
+  .footer__link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--main-color);
+    transition: width 0.3s ease;
+  }
+  .footer__link:hover::after,
+  .footer__link:focus::after {
+    width: 100%;
+  }
+  
+  .footer__link:hover,
+  .footer__link:focus {
+    transition: ease;
+    opacity: 0.9;
+  }
+  
+  .footer__link:visited {
+    color: var(--main-color); /* Mantém a cor mesmo após visita */
+    text-decoration: none;
+  }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.5rem 1.5rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .footer-logo img {
+        margin: 0 auto;
+    }
+
+    .footer-contact p {
+        justify-content: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links h3,
+    .footer-contact h3,
+    .footer-social h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-links a,
+    .footer-contact p {
+        font-size: 0.85rem;
+        text-decoration: none;
+    }
+
+    .footer-bottom {
+        font-size: 0.75rem;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        text-decoration: none;
+    }
+
+    .social-icons i {
+        font-size: 1rem;
+        text-decoration: none;
+    }
+}
+
 
 .social-media img{
     width: 3.5rem;
