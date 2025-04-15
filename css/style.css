@@ -66,11 +66,22 @@ header{
 
 }
 
-.logo{
+/* .logo{
     font-size: 1.7rem;
     color: var(--text-color);
     font-weight: 600;
     cursor: default;
+} */
+
+.logo img{
+    
+    height: auto;
+    width: 60px;
+    transition: transform 0.3s ease;
+ 
+}
+.logo:hover img {
+    transform: scale(1.05);
 }
 
 .nav-responsive {
