@@ -666,6 +666,8 @@ form .input-box input, form textarea{
 
     .footer-logo img {
         margin: 0 auto;
+        width: 100px;
+        height: auto;
     }
 
     .footer-contact p {
