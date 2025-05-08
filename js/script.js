@@ -22,3 +22,30 @@ AOS.init({
     easing: 'ease-in-out', // Suavização natural
     offset: 100,   // Inicia 100px antes do elemento entrar na tela
 });
+
+document.querySelectorAll('.saiba-mais').forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const popupId = button.getAttribute('data-popup');
+      const popup = document.getElementById(popupId);
+      popup.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  document.querySelectorAll('.close-popup').forEach(button => {
+    button.addEventListener('click', () => {
+      const popup = button.closest('.popup-overlay');
+      popup.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.querySelectorAll('.popup-overlay').forEach(popup => {
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
