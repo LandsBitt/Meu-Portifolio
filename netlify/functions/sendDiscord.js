@@ -1,7 +1,24 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 exports.handler = async (event) => {
-    const data = JSON.parse(event.body);
+    // Só aceita POST
+    if (event.httpMethod !== 'POST') {
+        return {
+            statusCode: 405,
+            body: JSON.stringify({ message: "Method Not Allowed" })
+        };
+    }
+
+    let data;
+    // Tenta fazer o parse do JSON
+    try {
+        data = JSON.parse(event.body);
+    } catch (error) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ message: "Invalid JSON body" })
+        };
+    }
 
     const webhookURL = process.env.DISCORD_WEBHOOK_URL;
 
@@ -26,19 +43,26 @@ exports.handler = async (event) => {
                     { name: "💬 Mensagem", value: data.message, inline: false }
                 ],
                 footer: { text: "Enviado pelo formulário do site" },
-                timestamp: new Date()
+                timestamp: new Date().toISOString()
             }
         ]
     };
 
-    await fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    });
+    try {
+        await fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "Mensagem enviada com sucesso!" })
-    };
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: "Mensagem enviada com sucesso!" })
+        };
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: "Erro ao enviar webhook." })
+        };
+    }
 };

@@ -12,13 +12,18 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     try {
         const response = await fetch('/.netlify/functions/sendDiscord', {
             method: 'POST',
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
         });
 
         const result = await response.json();
 
-        alert(result.message);
-        e.target.reset();
+        if (response.ok) {
+            alert(result.message);
+            e.target.reset();
+        } else {
+            alert("Erro ao enviar mensagem: " + (result.message || result.error));
+        }
     } catch (error) {
         alert("Ocorreu um erro ao enviar sua mensagem.");
         console.error(error);
