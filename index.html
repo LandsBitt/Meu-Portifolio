@@ -400,73 +400,7 @@
         </div>
     </footer>
 
-    <script>
-
-        document.getElementById('contact-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const name = e.target.name.value;
-            const email = e.target.email.value;
-            const phone = e.target.phone.value || "Não informado";
-            const subject = e.target.subject.value || "Não informado";
-            const message = e.target.message.value;
-
-            const webhookURL = "https://discord.com/api/webhooks/1361399601818636430/9EsZSJmnOaJZzV-vkt_Q3viYsOKr-YYx4wd2edBYoK1-eo2UGxPkckUVunNki0s91Mik";
-
-            const data = {
-                username: "Contato do Portfólio 🚀",
-
-                embeds: [
-                    {
-                        title: "📨 Novo Contato Recebido!",
-                        color: 0x00bfff, // Azul bonitinho
-                        fields: [
-                            {
-                                name: "👤 Nome",
-                                value: name,
-                                inline: false
-                            },
-                            {
-                                name: "📧 Email",
-                                value: email,
-                                inline: true
-                            },
-                            {
-                                name: "📱 Telefone",
-                                value: phone,
-                                inline: true
-                            },
-                            {
-                                name: "📝 Assunto",
-                                value: subject,
-                                inline: false
-                            },
-                            {
-                                name: "💬 Mensagem",
-                                value: message,
-                                inline: false
-                            }
-                        ],
-                        footer: {
-                            text: "Enviado pelo formulário do site",
-                        },
-                        timestamp: new Date()
-                    }
-                ]
-            };
-
-            await fetch(webhookURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-
-            alert("Mensagem enviada com sucesso! Valeu ✌️");
-            e.target.reset();
-        });
-    </script>
+    <script src="js/form.js"></script>
     <!-- AOS JavaScript -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
