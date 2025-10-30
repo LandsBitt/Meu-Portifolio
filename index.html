@@ -196,13 +196,13 @@
             </div>
             <!-- Projeto 5 -->
             <div class="portfolio-box" data-aos="zoom-in" data-aos-delay="500">
-                <img src="Imagens/05.jpg" alt="Projeto futuro">
+                <img src="Imagens/06.jpg" alt="Phonebook API">
                 <div class="portfolio-layer">
-                    <h4>Dashboard Administrativo</h4>
+                    <h4>Phonebook API</h4>
                     <p>
-                        Painel administrativo com autenticação e relatórios, a ser desenvolvido em Java e Spring Boot.
+                        API simples de lista telefônica usando Express.js e SQLite.
                     </p>
-                    <a href="#" class="btn saiba-mais" data-popup="dashboard-admin-popup">Saiba Mais</a>
+                    <a href="#" class="btn saiba-mais" data-popup="phonebook-api-popup">Saiba Mais</a>
                 </div>
             </div>
         </div>
@@ -270,16 +270,42 @@
         </div>
     </div>
     <!-- Popup for Dashboard Administrativo -->
-    <div class="popup-overlay" id="dashboard-admin-popup">
-        <div class="popup-content">
-            <button class="close-popup" aria-label="Fechar popup">✕</button>
-            <h4>Dashboard Administrativo (em breve)</h4>
-            <p>
-                Um painel administrativo com autenticação, cadastro de usuários e relatórios. Projeto será desenvolvido
-                em Java e Spring Boot.
-            </p>
-        </div>
+    <div class="popup-overlay" id="phonebook-api-popup">
+    <div class="popup-content">
+        <button class="close-popup" aria-label="Fechar popup">✕</button>
+        <h4>Phonebook API</h4>
+        <p>
+            API simples de lista telefônica usando Express.js e SQLite.
+        </p>
+        <ul>
+            <li><code>GET /contacts</code></li>
+            <li><code>GET /contacts/:id</code></li>
+            <li><code>POST /contacts</code></li>
+            <li><code>PUT /contacts/:id</code></li>
+            <li><code>DELETE /contacts/:id</code></li>
+        </ul>
+        <br>
+        <h5>exemplos com curl no PowerShell:</h5>
+        <p>Criar contato</p>
+        <pre><code>curl -X POST http://localhost:3000/contacts -H "Content-Type: application/json" -d '{"nome":"João","email":"joao@example.com","telefone":"123456789"}'</code></pre>
+        <p>Listar contatos</p>
+        <pre><code>curl http://localhost:3000/contacts</code></pre>
+        <p>Obter por id</p>
+        <pre><code>curl http://localhost:3000/contacts/1</code></pre>
+        <p>Atualizar</p>
+        <pre><code>curl -X PUT http://localhost:3000/contacts/1 -H "Content-Type: application/json" -d '{"telefone":"987654321"}'</code></pre>
+        <p>Deletar</p>
+        <pre><code>curl -X DELETE http://localhost:3000/contacts/1</code></pre>
+        <br>
+        <br>
+        <h5>Observações:</h5>
+        <ul>
+            <li>O arquivo database.sqlite será criado automaticamente na raiz do projeto quando o servidor for iniciado.</li>
+            <li>nome e telefone são campos obrigatórios ao criar um contato.</li>
+        </ul>
+        <a href="https://github.com/LandsBitt/BackPhoneBookJS" target="_blank" class="btn">Ver Projeto no GitHub</a>
     </div>
+</div>
 
 
     <!-- skills -->
