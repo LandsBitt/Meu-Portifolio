@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import dotenv from "dotenv";
+import { getRemoteIp, verifyRecaptchaToken } from "../../../lib/recaptcha";
 
 export const runtime = "nodejs";
 
@@ -49,11 +50,25 @@ export async function POST(request) {
   const message = sanitizeText(data.message, MAX_LENGTHS.message, {
     preserveNewlines: true,
   });
+  const recaptchaToken =
+    typeof data.recaptchaToken === "string" ? data.recaptchaToken : "";
 
   if (!name || !email || !message || !isValidEmail(email)) {
     return NextResponse.json(
       { message: "Preencha nome, e-mail válido e mensagem." },
       { status: 400 }
+    );
+  }
+
+  const recaptchaResult = await verifyRecaptchaToken({
+    token: recaptchaToken,
+    remoteIp: getRemoteIp(request),
+  });
+
+  if (!recaptchaResult.success) {
+    return NextResponse.json(
+      { message: recaptchaResult.message },
+      { status: recaptchaResult.status || 403 }
     );
   }
 

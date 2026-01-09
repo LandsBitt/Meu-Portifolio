@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const initialFormData = {
   name: "",
@@ -17,6 +18,12 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState("");
+  const [recaptchaError, setRecaptchaError] = useState("");
+  const recaptchaRef = useRef(null);
+  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+  const isSubmitDisabled =
+    isSubmitting || !recaptchaToken || !recaptchaSiteKey;
 
   const fieldIds = useMemo(
     () => ({
@@ -32,6 +39,23 @@ export default function Contact() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token || "");
+    if (token) {
+      setRecaptchaError("");
+    }
+  };
+
+  const handleRecaptchaExpired = () => {
+    setRecaptchaToken("");
+    setRecaptchaError("reCAPTCHA expirou. Marque novamente.");
+  };
+
+  const handleRecaptchaErrored = () => {
+    setRecaptchaToken("");
+    setRecaptchaError("Nao foi possivel carregar o reCAPTCHA.");
   };
 
   const validateForm = () => {
@@ -69,12 +93,52 @@ export default function Contact() {
     }
 
     setErrors({});
+
+    if (!recaptchaSiteKey) {
+      setStatus({
+        type: "error",
+        message: "reCAPTCHA nao configurado. Tente novamente mais tarde.",
+      });
+      return;
+    }
+
+    if (!recaptchaToken) {
+      setRecaptchaError("Confirme o reCAPTCHA.");
+      setStatus({
+        type: "error",
+        message: "Confirme o reCAPTCHA para enviar.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      const recaptchaResponse = await fetch("/api/verify-recaptcha", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: recaptchaToken }),
+      });
+
+      const recaptchaResult = await recaptchaResponse
+        .json()
+        .catch(() => ({}));
+
+      const recaptchaFailureMessage =
+        "Falha na verificacao do reCAPTCHA. Tente novamente.";
+
+      if (!recaptchaResponse.ok || !recaptchaResult.success) {
+        setRecaptchaError(recaptchaFailureMessage);
+        setRecaptchaToken("");
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
+        throw new Error(recaptchaFailureMessage);
+      }
+
       const payload = {
         ...formData,
-        // Opcional: inclua aqui o token do reCAPTCHA quando ativar.
+        recaptchaToken,
       };
 
       const response = await fetch("/api/sendDiscord", {
@@ -91,6 +155,11 @@ export default function Contact() {
 
       setStatus({ type: "success", message: result.message });
       setFormData(initialFormData);
+      setRecaptchaToken("");
+      setRecaptchaError("");
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
     } catch (error) {
       setStatus({
         type: "error",
@@ -208,7 +277,31 @@ export default function Contact() {
           </span>
         )}
 
-        <button type="submit" className="btn" disabled={isSubmitting}>
+        <div className="recaptcha" aria-live="polite">
+          {recaptchaSiteKey ? (
+            <>
+              {/* Using react-google-recaptcha to render and load the v2 widget. */}
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={recaptchaSiteKey}
+                onChange={handleRecaptchaChange}
+                onExpired={handleRecaptchaExpired}
+                onErrored={handleRecaptchaErrored}
+              />
+            </>
+          ) : (
+            <p className="error-message" role="alert">
+              reCAPTCHA nao configurado.
+            </p>
+          )}
+        </div>
+        {recaptchaError && (
+          <span className="error-message" role="alert">
+            {recaptchaError}
+          </span>
+        )}
+
+        <button type="submit" className="btn" disabled={isSubmitDisabled}>
           {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
         </button>
 

@@ -761,6 +761,12 @@ form .input-box input, form textarea{
     
 }
 
+.recaptcha {
+    display: flex;
+    justify-content: center;
+    margin: 0.8rem 0 0.4rem;
+}
+
 .form-status {
     margin-top: 0.8rem;
     font-size: 0.95rem;
