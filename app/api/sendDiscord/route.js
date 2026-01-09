@@ -66,8 +66,14 @@ export async function POST(request) {
   });
 
   if (!recaptchaResult.success) {
+    if (Array.isArray(recaptchaResult.errorCodes)) {
+      console.warn("reCAPTCHA verification failed:", recaptchaResult.errorCodes);
+    }
     return NextResponse.json(
-      { message: recaptchaResult.message },
+      {
+        message: recaptchaResult.message,
+        errorCodes: recaptchaResult.errorCodes || [],
+      },
       { status: recaptchaResult.status || 403 }
     );
   }

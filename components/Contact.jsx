@@ -129,9 +129,10 @@ export default function Contact() {
 
       if (!response.ok) {
         if (response.status === 403) {
-          setRecaptchaError(
-            "Falha na verificacao do reCAPTCHA. Tente novamente."
-          );
+          const recaptchaMessage =
+            result.message ||
+            "Falha na verificacao do reCAPTCHA. Tente novamente.";
+          setRecaptchaError(recaptchaMessage);
           setRecaptchaToken("");
           if (recaptchaRef.current) {
             recaptchaRef.current.reset();
