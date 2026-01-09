@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import PrivacyConsentModal from "../components/PrivacyConsentModal";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <div id="particles-js" aria-hidden="true"></div>
+        <PrivacyConsentModal />
         {children}
       </body>
     </html>

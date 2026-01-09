@@ -767,6 +767,77 @@ form .input-box input, form textarea{
     margin: 0.8rem 0 0.4rem;
 }
 
+.privacy-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.privacy-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.privacy-modal__content {
+    position: relative;
+    background: var(--bg-color-02);
+    color: var(--text-color);
+    border: 1px solid var(--main-color);
+    border-radius: 12px;
+    padding: 2rem;
+    width: calc(100% - 2rem);
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.privacy-modal__content h2 {
+    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+}
+
+.privacy-modal__content p {
+    margin-bottom: 0.8rem;
+    color: var(--color-01);
+}
+
+.privacy-modal__link {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+.legal {
+    max-width: 960px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.legal h1,
+.legal h2 {
+    margin-bottom: 1rem;
+}
+
+.legal p {
+    margin-bottom: 1rem;
+    color: var(--color-01);
+}
+
+.legal ul {
+    margin: 0 0 1rem 1.5rem;
+    color: var(--color-01);
+}
+
+.legal a {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
 .form-status {
     margin-top: 0.8rem;
     font-size: 0.95rem;
