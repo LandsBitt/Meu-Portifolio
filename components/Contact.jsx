@@ -114,28 +114,6 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const recaptchaResponse = await fetch("/api/verify-recaptcha", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: recaptchaToken }),
-      });
-
-      const recaptchaResult = await recaptchaResponse
-        .json()
-        .catch(() => ({}));
-
-      const recaptchaFailureMessage =
-        "Falha na verificacao do reCAPTCHA. Tente novamente.";
-
-      if (!recaptchaResponse.ok || !recaptchaResult.success) {
-        setRecaptchaError(recaptchaFailureMessage);
-        setRecaptchaToken("");
-        if (recaptchaRef.current) {
-          recaptchaRef.current.reset();
-        }
-        throw new Error(recaptchaFailureMessage);
-      }
-
       const payload = {
         ...formData,
         recaptchaToken,
@@ -147,9 +125,18 @@ export default function Contact() {
         body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
+        if (response.status === 403) {
+          setRecaptchaError(
+            "Falha na verificacao do reCAPTCHA. Tente novamente."
+          );
+          setRecaptchaToken("");
+          if (recaptchaRef.current) {
+            recaptchaRef.current.reset();
+          }
+        }
         throw new Error(result.message || result.error || "Erro ao enviar.");
       }
 
