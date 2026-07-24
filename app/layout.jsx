@@ -14,6 +14,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://rolandbittencourt.vercel.app"),
   title: "Roland Bittencourt | Desenvolvedor & Técnico em TI",
   description:
     "Portfólio de Roland dos Santos - Desenvolvedor Front-End e Back-End, especialista em montagem e manutenção de computadores.",
