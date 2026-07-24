@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const navLinks = [
@@ -13,18 +13,26 @@ const navLinks = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const handleToggleMenu = () => {
-    setMenuOpen((open) => !open);
-  };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const handleNavClick = () => {
-    setMenuOpen(false);
-  };
+  const handleToggleMenu = () => setMenuOpen((open) => !open);
+  const handleNavClick = () => setMenuOpen(false);
 
   return (
-    <header>
-      <a href="#home" className="logo" aria-label="Voltar ao início">
+    <header className={scrolled ? "is-scrolled" : ""}>
+      <a
+        href="#home"
+        className="logo"
+        aria-label="Voltar ao início"
+        data-cur="home"
+      >
         <Image
           src="/Imagens/Icon-Photoroom.png"
           alt="Logo"
@@ -36,7 +44,7 @@ export default function Header() {
 
       <nav className="nav" aria-label="Navegação principal">
         {navLinks.map((link) => (
-          <a key={link.href} href={link.href}>
+          <a key={link.href} href={link.href} data-cur="ir">
             {link.label}
           </a>
         ))}

@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 const services = [
   {
     icon: "bx bx-server",
@@ -19,26 +23,52 @@ const services = [
   },
 ];
 
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export default function Services() {
   return (
     <section className="services" id="services" aria-labelledby="services-title">
-      <h2 id="services-title">
+      <motion.h2
+        id="services-title"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
         Meus <span>Serviços</span>
-      </h2>
-      <div className="services-container">
-        {services.map((service, index) => (
-          <div
+      </motion.h2>
+      <motion.div
+        className="services-container"
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {services.map((service) => (
+          <motion.div
             key={service.title}
             className="services-box"
-            data-aos="zoom-in"
-            data-aos-delay={(index + 1) * 100}
+            variants={item}
+            data-cur="hover"
           >
             <i className={service.icon} aria-hidden="true"></i>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

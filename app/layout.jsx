@@ -1,6 +1,10 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import PrivacyConsentModal from "../components/PrivacyConsentModal";
+import LenisProvider from "../components/motion/LenisProvider";
+import Loader from "../components/motion/Loader";
+import CustomCursor from "../components/motion/CustomCursor";
+import PageTransition from "../components/motion/PageTransition";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,6 +33,9 @@ export const metadata = {
     icon: "/Imagens/Icon.png",
     shortcut: "/Imagens/Icon.png",
   },
+  verification: {
+    google: "PE8RRT1o04p-Iwes4VM3NZc4eu5tE3F2DyrATrq26bQ",
+  },
 };
 
 export const viewport = {
@@ -46,18 +53,18 @@ export default function RootLayout({ children }) {
         />
         <link
           rel="stylesheet"
-          href="https://unpkg.com/aos@2.3.1/dist/aos.css"
-        />
-        <link
-          rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         />
         <link rel="preload" href="/Imagens/Perfil.png" as="image" />
       </head>
       <body>
         <div id="particles-js" aria-hidden="true"></div>
-        <PrivacyConsentModal />
-        {children}
+        <LenisProvider>
+          <Loader />
+          <CustomCursor />
+          <PrivacyConsentModal />
+          <PageTransition>{children}</PageTransition>
+        </LenisProvider>
       </body>
     </html>
   );

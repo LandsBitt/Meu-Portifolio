@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 
 const projects = [
   {
@@ -28,12 +29,7 @@ const projects = [
       title: "Oficina Box23",
       description:
         "Desenvolvi um site responsivo para a Oficina Box23, com layout moderno e objetivo. O projeto foi feito com HTML, CSS e JavaScript.",
-      links: [
-        {
-          href: "https://box23.netlify.app/",
-          label: "Ver Projeto",
-        },
-      ],
+      links: [{ href: "https://box23.netlify.app/", label: "Ver Projeto" }],
     },
   },
   {
@@ -66,14 +62,8 @@ const projects = [
       description:
         'Site do "Foco na Mente" (UNITAU) para promover saúde mental, com front-end em HTML, CSS e JavaScript. Inclui navegação, carrossel de vídeos, artigos e formulário com integração ao Telegram. Em breve, back-end com Java e banco de dados.',
       links: [
-        {
-          href: "https://unitau.br/foconamente/",
-          label: "Ver Projeto",
-        },
-        {
-          href: "#",
-          label: "Certificado",
-        },
+        { href: "https://unitau.br/foconamente/", label: "Ver Projeto" },
+        { href: "#", label: "Certificado" },
       ],
     },
   },
@@ -138,15 +128,22 @@ const projects = [
   },
 ];
 
-const animationDelays = [100, 200, 600, 300, 400, 500];
+const gridContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function Portfolio() {
   const [activePopup, setActivePopup] = useState(null);
-
-  const projectList = projects.map((project, index) => ({
-    ...project,
-    delay: animationDelays[index] || 100,
-  }));
 
   const closePopup = () => setActivePopup(null);
 
@@ -159,30 +156,47 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        closePopup();
-      }
+      if (event.key === "Escape") closePopup();
     };
     if (activePopup) {
       window.addEventListener("keydown", handleEscape);
     }
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
+    return () => window.removeEventListener("keydown", handleEscape);
   }, [activePopup]);
 
+  const activeProject = projects.find((p) => p.id === activePopup);
+
   return (
-    <section className="portfolio" id="portfolio" aria-labelledby="portfolio-title">
-      <h2 id="portfolio-title">
+    <section
+      className="portfolio"
+      id="portfolio"
+      aria-labelledby="portfolio-title"
+    >
+      <motion.h2
+        id="portfolio-title"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
         Últimos <span>Projetos</span>
-      </h2>
-      <div className="portfolio-container">
-        {projectList.map((project) => (
-          <div
+      </motion.h2>
+      <motion.div
+        className="portfolio-container"
+        variants={gridContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        {projects.map((project) => (
+          <motion.div
             key={project.id}
             className="portfolio-box"
-            data-aos="zoom-in"
-            data-aos-delay={project.delay}
+            variants={cardVariant}
+            layoutId={`card-${project.id}`}
+            data-cur="view"
+            whileHover={{ y: -12 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
             <Image
               src={project.image}
@@ -199,45 +213,55 @@ export default function Portfolio() {
                 type="button"
                 className="btn saiba-mais"
                 onClick={() => setActivePopup(project.id)}
+                data-cur="view"
               >
                 Saiba Mais
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {projectList.map((project) => {
-        const isOpen = activePopup === project.id;
-        return (
-          <div
-            key={`${project.id}-popup`}
-            className={`popup-overlay ${isOpen ? "active" : ""}`}
+      <AnimatePresence>
+        {activeProject && (
+          <motion.div
+            key={`${activeProject.id}-popup`}
+            className="popup-overlay active"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={(event) => {
-              if (event.target === event.currentTarget) {
-                closePopup();
-              }
+              if (event.target === event.currentTarget) closePopup();
             }}
             role="dialog"
             aria-modal="true"
-            aria-hidden={!isOpen}
-            aria-labelledby={`popup-${project.id}-title`}
+            aria-labelledby={`popup-${activeProject.id}-title`}
           >
-            <div className="popup-content">
+            <motion.div
+              className="popup-content"
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
               <button
                 type="button"
                 className="close-popup"
                 aria-label="Fechar popup"
                 onClick={closePopup}
+                data-cur="fechar"
               >
                 ×
               </button>
-              <h4 id={`popup-${project.id}-title`}>{project.popup.title}</h4>
-              <p>{project.popup.description}</p>
+              <h4 id={`popup-${activeProject.id}-title`}>
+                {activeProject.popup.title}
+              </h4>
+              <p>{activeProject.popup.description}</p>
 
-              {project.popup.endpoints && (
+              {activeProject.popup.endpoints && (
                 <ul>
-                  {project.popup.endpoints.map((endpoint) => (
+                  {activeProject.popup.endpoints.map((endpoint) => (
                     <li key={endpoint}>
                       <code>{endpoint}</code>
                     </li>
@@ -245,10 +269,10 @@ export default function Portfolio() {
                 </ul>
               )}
 
-              {project.popup.examples && (
+              {activeProject.popup.examples && (
                 <>
                   <h5>Exemplos com curl no PowerShell:</h5>
-                  {project.popup.examples.map((example) => (
+                  {activeProject.popup.examples.map((example) => (
                     <div key={example.label}>
                       <p>{example.label}</p>
                       <pre>
@@ -259,32 +283,33 @@ export default function Portfolio() {
                 </>
               )}
 
-              {project.popup.notes && (
+              {activeProject.popup.notes && (
                 <>
                   <h5>Observações:</h5>
                   <ul>
-                    {project.popup.notes.map((note) => (
+                    {activeProject.popup.notes.map((note) => (
                       <li key={note}>{note}</li>
                     ))}
                   </ul>
                 </>
               )}
 
-              {project.popup.links?.map((link) => (
+              {activeProject.popup.links?.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn"
+                  data-cur="open"
                 >
                   {link.label}
                 </a>
               ))}
-            </div>
-          </div>
-        );
-      })}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

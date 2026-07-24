@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { motion } from "framer-motion";
 
 const initialFormData = {
   name: "",
@@ -160,11 +161,25 @@ export default function Contact() {
 
   return (
     <section className="contact" id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">
+      <motion.h2
+        id="contact-title"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
         Entre em <span>Contato</span>
-      </h2>
+      </motion.h2>
 
-      <form id="contact-form" onSubmit={handleSubmit} noValidate>
+      <motion.form
+        id="contact-form"
+        onSubmit={handleSubmit}
+        noValidate
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+      >
         <div className="input-box">
           <div className="field">
             <label htmlFor={fieldIds.name} className="sr-only">
@@ -289,7 +304,12 @@ export default function Contact() {
           </span>
         )}
 
-        <button type="submit" className="btn" disabled={isSubmitDisabled}>
+        <button
+          type="submit"
+          className="btn"
+          disabled={isSubmitDisabled}
+          data-cur="enviar"
+        >
           {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
         </button>
 
@@ -302,7 +322,7 @@ export default function Contact() {
             {status.message}
           </p>
         )}
-      </form>
+      </motion.form>
     </section>
   );
 }

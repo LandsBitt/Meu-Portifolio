@@ -6,6 +6,7 @@ import Skills from "../components/Skills";
 import Contact from "../components/Contact";
 import About from "../components/About";
 import Footer from "../components/Footer";
+import Marquee from "../components/Marquee";
 import ExternalScripts from "../components/ExternalScripts";
 
 export default function Page() {
@@ -15,6 +16,7 @@ export default function Page() {
       <main>
         <Home />
         <Services />
+        <Marquee />
         <Portfolio />
         <Skills />
         <Contact />

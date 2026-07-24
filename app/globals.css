@@ -14,13 +14,9 @@
     --color-05: #232323;
 
 }
-/* AOS Styles */
+/* Legacy AOS attributes kept for compatibility but no longer drive styles. */
 [data-aos] {
-    opacity: 0; /* Elementos começam invisíveis */
-    transition-property: transform, opacity; /* Garante transições suaves */
-}
-[data-aos].aos-animate {
-    opacity: 1; /* Torna visível quando animado */
+    opacity: 1;
 }
 
 * {
@@ -75,15 +71,12 @@ header{
     left: 0;
     width: 100%;
     padding: 1.1rem;
-    background-color: var(--bg-color-01);
+    background-color: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    box-shadow: 0 0 5px #4d586e;
-
-    /* border: solid 1px var(--color-02); */
-
+    box-shadow: none;
 }
 
 /* .logo{
@@ -175,11 +168,21 @@ span{
 }
 
 .home-img{
+    width: min(32vw, 24rem);
+    max-width: 24rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     border-right: solid 0.6rem;
     border-bottom: solid 0.6rem;
     border-image: linear-gradient(135deg, transparent 20%, var(--main-color)) 1; 
 }
 .about-img{
+    width: min(30vw, 22rem);
+    max-width: 22rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     border-left: solid 0.6rem;
     border-bottom: solid 0.6rem;
     border-image: linear-gradient(225deg, transparent 20%, var(--main-color)) 1;
@@ -187,7 +190,8 @@ span{
 
 .home-img img, .about-img img{
     width: 100%;
-
+    height: auto;
+    display: block;
 }
 
 .about {
@@ -1664,4 +1668,377 @@ form .input-box input, form textarea{
   left: 0;
   z-index: -1;
   background-color: var(--bg-color-01);
+}
+
+/* =====================================================================
+   MOTION UPGRADE — loader, cursor, nav, marquee, transitions, reveals.
+   Cores/tipografia herdadas das tokens existentes em :root.
+   ===================================================================== */
+
+/* ---- Loader ---- */
+.site-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background-color: var(--bg-color-01);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+}
+
+.site-loader__inner {
+    width: min(520px, 80vw);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+}
+
+.site-loader__count {
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(4rem, 14vw, 9rem);
+    color: var(--text-color);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.site-loader__bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    position: relative;
+}
+
+.site-loader__bar-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 0.12s linear;
+}
+
+/* ---- Hero rotating role ---- */
+.home-role {
+    margin-top: 1.2rem;
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-01);
+    letter-spacing: 0.02em;
+}
+
+.home-role__label {
+    color: var(--color-01);
+}
+
+.home-role__word-wrap {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    min-width: 10ch;
+    line-height: 1.2;
+}
+
+.home-role__word {
+    display: inline-block;
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+/* ---- Custom cursor ---- */
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2500;
+    mix-blend-mode: normal;
+}
+
+.cursor__dot,
+.cursor__ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.cursor__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    transition: width 0.22s ease, height 0.22s ease, opacity 0.22s ease;
+}
+
+.cursor__dot.is-hover {
+    opacity: 0;
+}
+
+.cursor__ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.cursor__ring.is-hover {
+    width: 56px;
+    height: 56px;
+    background-color: rgba(0, 238, 255, 0.12);
+}
+
+.cursor__ring.has-label {
+    width: auto;
+    min-width: 72px;
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: 999px;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.cursor__label {
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bg-color-01);
+    white-space: nowrap;
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cursor { display: none !important; }
+}
+
+/* ---- Header scroll state ---- */
+header {
+    transition: background-color 0.4s ease, box-shadow 0.4s ease,
+        backdrop-filter 0.4s ease, padding 0.3s ease;
+}
+
+header.is-scrolled {
+    background-color: rgba(31, 36, 45, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* Nav underline refinement — origin left, scaleX */
+.nav a::after {
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+    background-color: var(--main-color);
+}
+
+.nav a:hover::after,
+.nav a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+/* Mobile menu transition */
+.nav-responsive {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 1rem;
+    transition: max-height 0.4s cubic-bezier(0.76, 0, 0.24, 1),
+        padding 0.4s ease;
+}
+
+.nav-responsive.open {
+    max-height: 420px;
+    padding: 1rem;
+}
+
+/* ---- Button micro-interaction ---- */
+.btn {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.btn:hover {
+    transform: translateY(-2px) scale(1.03);
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.99);
+}
+
+/* ---- Portfolio card polish (seta animada) ---- */
+.portfolio-box {
+    cursor: none;
+}
+
+.portfolio-box .saiba-mais {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.portfolio-box .saiba-mais::after {
+    content: '\2192';
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.portfolio-box:hover .saiba-mais::after,
+.portfolio-box .saiba-mais:hover::after {
+    transform: translateX(6px);
+}
+
+/* ---- Skills progress animation ---- */
+.skill-box {
+    will-change: transform;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skill-box.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skill-box .progress-bar::after {
+    transform-origin: left center;
+    transform: scaleX(0);
+    width: 100%;
+    transition: transform 1.1s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.skill-box.is-visible .progress-bar.java::after { transform: scaleX(0.5); }
+.skill-box.is-visible .progress-bar.postgresql::after { transform: scaleX(0.3); }
+.skill-box.is-visible .progress-bar.python::after { transform: scaleX(0.2); }
+.skill-box.is-visible .progress-bar.html::after { transform: scaleX(0.6); }
+.skill-box.is-visible .progress-bar.css::after { transform: scaleX(0.6); }
+.skill-box.is-visible .progress-bar.javascript::after { transform: scaleX(0.5); }
+
+/* ---- Form focus states ---- */
+form .input-box input,
+form textarea {
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease,
+        background-color 0.3s ease;
+}
+
+form .input-box input:focus,
+form textarea:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 3px rgba(0, 238, 255, 0.18);
+}
+
+/* ---- Social icons micro-interaction ---- */
+.social-media a,
+.social-icons a {
+    transform: translateZ(0);
+}
+
+.social-media a:hover,
+.social-icons a:hover {
+    transform: translateY(-3px) rotate(-4deg);
+}
+
+/* ---- Marquee ---- */
+.marquee {
+    overflow: hidden;
+    padding: 2.5rem 0;
+    background-color: var(--bg-color-01);
+    border-top: 1px solid rgba(0, 238, 255, 0.15);
+    border-bottom: 1px solid rgba(0, 238, 255, 0.15);
+    min-height: 0;
+}
+
+.marquee__track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: marquee-scroll 32s linear infinite;
+    will-change: transform;
+}
+
+.marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 2.4vw, 2rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.marquee__item span {
+    color: var(--main-color);
+}
+
+.marquee__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    flex: 0 0 auto;
+}
+
+@keyframes marquee-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ---- Page transition overlay ---- */
+.page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    background-color: var(--bg-color-01);
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* ---- Focus visible baseline ---- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 3px;
+}
+
+/* ---- Reduced motion overrides ---- */
+@media (prefers-reduced-motion: reduce) {
+    .marquee__track { animation: none; }
+    .site-loader { display: none; }
+    .cursor { display: none !important; }
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
 }

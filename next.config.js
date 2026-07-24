@@ -1,17 +1,33 @@
-const ContentSecurityPolicy = `
-  default-src 'self';
-  base-uri 'self';
-  form-action 'self';
-  object-src 'none';
-  frame-ancestors 'none';
-  img-src 'self' data: blob: https://www.google.com https://www.gstatic.com;
-  font-src 'self' data: https://unpkg.com https://cdnjs.cloudflare.com;
-  style-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com;
-  script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.google.com https://www.gstatic.com https://www.recaptcha.net;
-  frame-src https://www.google.com https://www.recaptcha.net;
-  connect-src 'self' https://www.google.com https://www.gstatic.com https://www.recaptcha.net;
-  upgrade-insecure-requests;
-`;
+const isProduction = process.env.NODE_ENV === "production";
+
+const ContentSecurityPolicy = isProduction
+  ? `
+      default-src 'self';
+      base-uri 'self';
+      form-action 'self';
+      object-src 'none';
+      frame-ancestors 'none';
+      img-src 'self' data: blob: https://www.google.com https://www.gstatic.com;
+      font-src 'self' data: https://unpkg.com https://cdnjs.cloudflare.com;
+      style-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com;
+      script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.google.com https://www.gstatic.com https://www.recaptcha.net;
+      frame-src https://www.google.com https://www.recaptcha.net;
+      connect-src 'self' https://www.google.com https://www.gstatic.com https://www.recaptcha.net;
+      upgrade-insecure-requests;
+    `
+  : `
+      default-src 'self';
+      base-uri 'self';
+      form-action 'self';
+      object-src 'none';
+      frame-ancestors 'none';
+      img-src 'self' data: blob: https://www.google.com https://www.gstatic.com;
+      font-src 'self' data: https://unpkg.com https://cdnjs.cloudflare.com;
+      style-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.google.com https://www.gstatic.com https://www.recaptcha.net;
+      frame-src https://www.google.com https://www.recaptcha.net;
+      connect-src 'self' ws: wss: http://localhost:* http://127.0.0.1:* https://www.google.com https://www.gstatic.com https://www.recaptcha.net;
+    `;
 
 const securityHeaders = [
   {
@@ -23,14 +39,17 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-DNS-Prefetch-Control", value: "on" },
   {
-    key: "Strict-Transport-Security",
-    value: "max-age=63072000; includeSubDomains; preload",
-  },
-  {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
   },
 ];
+
+if (isProduction) {
+  securityHeaders.push({
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  });
+}
 
 module.exports = {
   async headers() {
