@@ -30,10 +30,6 @@ export const metadata = {
     "Roland",
   ],
   authors: [{ name: "Roland dos Santos" }],
-  icons: {
-    icon: "/Imagens/Icon.png",
-    shortcut: "/Imagens/Icon.png",
-  },
   verification: {
     google: "PE8RRT1o04p-Iwes4VM3NZc4eu5tE3F2DyrATrq26bQ",
   },
