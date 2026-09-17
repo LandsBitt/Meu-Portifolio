@@ -5,6 +5,7 @@ import Portfolio from "../components/Portfolio";
 import Skills from "../components/Skills";
 import Contact from "../components/Contact";
 import About from "../components/About";
+import Journey from "../components/Journey";
 import Footer from "../components/Footer";
 import Marquee from "../components/Marquee";
 import ExternalScripts from "../components/ExternalScripts";
@@ -18,6 +19,7 @@ export default function Page() {
         <Services />
         <Marquee />
         <Portfolio />
+        <Journey />
         <Skills />
         <Contact />
         <About />

@@ -31,9 +31,11 @@ export default function PrivacyConsentModal() {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    window.__lenis?.stop();
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      window.__lenis?.start();
     };
   }, [isOpen]);
 
@@ -47,29 +49,47 @@ export default function PrivacyConsentModal() {
   }
 
   return (
-    <div className="privacy-modal" role="dialog" aria-modal="true">
-      <div className="privacy-modal__backdrop" />
-      <div className="privacy-modal__content" role="document">
-        <h2>Privacidade e Termos</h2>
-        <p>
-          Este site coleta apenas os dados enviados no formulario de contato
-          para responder sua mensagem. Usamos reCAPTCHA para evitar spam.
-        </p>
-        <p>
-          Ao continuar, voce concorda com a nossa{" "}
-          <Link
-            href="/privacidade"
-            className="privacy-modal__link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Politica de Privacidade e Termos
-          </Link>
-          .
-        </p>
-        <button type="button" className="btn" onClick={handleAccept}>
-          Aceito os termos
-        </button>
+    <div className="modal-overlay modal-overlay--privacy">
+      <div
+        className="modal modal--compact"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="privacy-modal-title"
+      >
+        <div className="modal__body">
+          <div className="modal__scroll">
+            <span className="modal__eyebrow">Privacidade</span>
+            <h2 id="privacy-modal-title" className="modal__title">
+              Sua privacidade importa
+            </h2>
+            <p className="modal__text">
+              Este site coleta apenas os dados enviados no formulário de contato
+              para responder sua mensagem. Usamos reCAPTCHA para evitar spam.
+            </p>
+            <p className="modal__text">
+              Ao continuar, você concorda com a nossa{" "}
+              <Link
+                href="/privacidade"
+                className="modal__link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Política de Privacidade e Termos
+              </Link>
+              .
+            </p>
+          </div>
+          <div className="modal__footer">
+            <button
+              type="button"
+              className="modal__action modal__action--primary"
+              onClick={handleAccept}
+              autoFocus
+            >
+              Aceitar e continuar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

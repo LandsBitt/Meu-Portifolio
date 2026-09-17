@@ -19,7 +19,7 @@ const services = [
     icon: "bx bx-wrench",
     title: "Montagem e manutenção",
     description:
-      "Sou técnico especializado em montagem, manutenção e formatação de computadores. Ofereço serviços de alta qualidade, garantindo o funcionamento ideal dos equipamentos.",
+      "Também faço montagem, manutenção e formatação de computadores sob demanda, garantindo o funcionamento ideal dos equipamentos.",
   },
 ];
 

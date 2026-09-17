@@ -61,16 +61,18 @@ export default function About() {
           variants={fadeUp}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          Estudante de <span>Análise e Desenvolvimento de Sistemas</span>
+          Desenvolvedor formado em <span>Análise e Desenvolvimento de Sistemas</span>
         </motion.h1>
         <motion.p variants={fadeUp} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
-          Sou um profissional apaixonado por tecnologia, com facilidade para
-          trabalhar em equipe e me adaptar a novos desafios. Sempre de mente
-          aberta a novas soluções, tenho experiência tanto no desenvolvimento
-          web (Front-End e Back-End) quanto em aplicações desktop com Java.
-          Também possuo experiência básica em PostgreSQL e sou especializado em
-          montagem e manutenção de computadores. Estou sempre em evolução nos
-          meus estudos de linguagens como Java e Python.
+          Sou apaixonado por tecnologia, com facilidade para trabalhar em
+          equipe e me adaptar a novos desafios. Me formei Tecnólogo em Análise
+          e Desenvolvimento de Sistemas pela UNITAU em 2026 e sigo no
+          Bacharelado em Sistemas de Informação, com conclusão prevista para
+          2027. Atuo como Técnico de Software Júnior na Elec, onde comecei como
+          estagiário de TI. Tenho experiência em desenvolvimento web (Front-End
+          e Back-End), aplicações desktop com Java e PostgreSQL, e continuo
+          evoluindo em linguagens como Java e Python. Também faço montagem e
+          manutenção de computadores sob demanda.
         </motion.p>
       </motion.div>
     </section>

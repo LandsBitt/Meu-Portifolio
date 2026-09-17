@@ -6,47 +6,69 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const projects = [
   {
-    id: "montagem-pc",
-    image: "/Imagens/01.jpg",
-    alt: "Montagem de PC",
-    title: "Montagem de Computador",
+    id: "ligno",
+    image: "/Imagens/Ligno.png",
+    alt: "Ligno, leitor de EPUB no tema escuro",
+    title: "Ligno",
     summary:
-      "Realizei a montagem do computador com instalação do sistema operacional e softwares essenciais.",
+      "Leitor de EPUB que roda inteiro no navegador, offline e sem servidor.",
     popup: {
-      title: "Montagem de Computador",
+      title: "Ligno",
       description:
-        "Realizei a montagem do computador com instalação do sistema operacional solicitado e softwares essenciais.",
+        "Leitor de EPUB que roda inteiro no navegador: sem servidor, sem upload e sem conta. A biblioteca fica no dispositivo e funciona offline. Tem paginação por colunas, tipografia ajustável, temas, destaques, notas de rodapé em popup e busca no livro. O mesmo código gera um site estático, um PWA instalável e um app desktop com Tauri.",
+      stack: ["React 18", "TypeScript", "Vite", "IndexedDB", "PWA", "Tauri"],
+      highlights: [
+        "Parser de EPUB, motor de paginação, store de estado e persistência escritos à mão; as únicas dependências de runtime são React e JSZip.",
+        "A posição de leitura é salva como offset de caractere e remapeada para o layout atual, então não se perde ao trocar fonte, girar a tela ou mudar de modo.",
+        "Livros, capas, progresso e destaques ficam no IndexedDB; nada sai do dispositivo.",
+      ],
+      links: [
+        { href: "https://lignoreader.netlify.app/", label: "Ver Projeto" },
+        { href: "https://github.com/LandsBitt/Ligno", label: "GitHub" },
+      ],
     },
   },
   {
     id: "oficina-box23",
-    image: "/Imagens/02.png",
-    alt: "Site Oficina Box23",
+    image: "/Imagens/Box23.png",
+    alt: "Site da Oficina Box23 no desktop e no celular",
     title: "Oficina Box23",
     summary:
-      "Desenvolvi um site responsivo para a Oficina Box23, com layout moderno e objetivo.",
+      "Site institucional para a Oficina Box23, oficina mecânica em Pindamonhangaba.",
     popup: {
       title: "Oficina Box23",
       description:
-        "Desenvolvi um site responsivo para a Oficina Box23, com layout moderno e objetivo. O projeto foi feito com HTML, CSS e JavaScript.",
+        "Site institucional da Oficina Box23, oficina mecânica em Pindamonhangaba. Layout moderno e responsivo, com apresentação da empresa, catálogo de serviços, CTA direto para o WhatsApp e formulário de contato integrado ao Telegram via Netlify Functions.",
+      stack: ["React", "Vite", "Tailwind CSS", "Netlify Functions"],
       links: [{ href: "https://box23.netlify.app/", label: "Ver Projeto" }],
     },
   },
   {
-    id: "bst-library",
-    image: "/Imagens/BSTAVL.png",
-    alt: "Projeto AVLEventScheduler",
-    title: "Agenda de Eventos com AVL",
-    summary: "Sistema em Java para gerenciar eventos com estrutura de árvore AVL.",
+    id: "mochila-launcher",
+    image: "/Imagens/Mochila.png",
+    alt: "Mochila Launcher mostrando a grade de capas e a tela de detalhes de um jogo",
+    title: "Mochila Launcher",
+    badge: "Beta",
+    summary:
+      "Launcher de jogos portátil para Windows que roda direto do HD externo, sem instalação.",
     popup: {
-      title: "Agenda de Eventos com AVL",
+      title: "Mochila Launcher",
       description:
-        "Aplicação desenvolvida em Java que permite o cadastro, busca e remoção de eventos ordenados por data. Utiliza uma estrutura de árvore AVL para manter os dados balanceados, garantindo performance estável mesmo com grande volume de dados. Ideal para fins educacionais e demonstração de estruturas de dados aplicadas a situações reais.",
+        "Launcher de jogos que vive no HD externo junto com os jogos. Mostra o acervo numa grade de capas, encontra sozinho o executável certo de cada pasta e abre o jogo. É um único executável de ~400 KB, sem instalador, sem registro e sem serviço em segundo plano: todo caminho é salvo relativo à pasta do launcher, então o HD funciona em qualquer PC, mesmo quando a letra do drive muda.",
+      stack: ["C#", ".NET Framework 4.8", "WinForms", "SteamGridDB API", "XInput"],
+      highlights: [
+        "Scanner que encontra o executável de cada jogo e ignora instaladores e redistribuíveis, com revisão antes de salvar.",
+        "Capas baixadas da API do SteamGridDB, histórico de tempo jogado, notas, tags e navegação por controle.",
+        "Enquanto o jogo roda, o launcher fica escondido usando 0 ms de CPU e cerca de 4 MB de RAM.",
+        "1124 testes automatizados embutidos na build de desenvolvimento.",
+      ],
       links: [
         {
-          href: "https://github.com/LandsBitt/AVLEventScheduler",
-          label: "Ver Projeto",
+          href: "https://github.com/LandsBitt/mochila-launcher/releases",
+          label: "Baixar",
+          icon: "bx-download",
         },
+        { href: "https://github.com/LandsBitt/mochila-launcher", label: "GitHub" },
       ],
     },
   },
@@ -67,17 +89,22 @@ const projects = [
       ],
     },
   },
-  {
-    id: "prototipo-frontend",
-    image: "/Imagens/04.jpg",
-    alt: "Protótipo Front-End",
-    title: "Protótipo Front-End",
-    summary:
-      "Protótipo de interface para site institucional de uma clínica odontológica, focado em UX.",
+    {
+    id: "bst-library",
+    image: "/Imagens/BSTAVL.png",
+    alt: "Projeto AVLEventScheduler",
+    title: "Agenda de Eventos com AVL",
+    summary: "Sistema em Java para gerenciar eventos com estrutura de árvore AVL.",
     popup: {
-      title: "Protótipo Front-End",
+      title: "Agenda de Eventos com AVL",
       description:
-        "Protótipo de interface para site institucional de uma clínica odontológica. Desenvolvido com foco em responsividade e UX.",
+        "Aplicação desenvolvida em Java que permite o cadastro, busca e remoção de eventos ordenados por data. Utiliza uma estrutura de árvore AVL para manter os dados balanceados, garantindo performance estável mesmo com grande volume de dados. Ideal para fins educacionais e demonstração de estruturas de dados aplicadas a situações reais.",
+      links: [
+        {
+          href: "https://github.com/LandsBitt/AVLEventScheduler",
+          label: "GitHub",
+        },
+      ],
     },
   },
   {
@@ -121,7 +148,7 @@ const projects = [
       links: [
         {
           href: "https://github.com/LandsBitt/BackPhoneBookJS",
-          label: "Ver Projeto no GitHub",
+          label: "GitHub",
         },
       ],
     },
@@ -149,8 +176,10 @@ export default function Portfolio() {
 
   useEffect(() => {
     document.body.style.overflow = activePopup ? "hidden" : "";
+    if (activePopup) window.__lenis?.stop();
     return () => {
       document.body.style.overflow = "";
+      window.__lenis?.start();
     };
   }, [activePopup]);
 
@@ -164,7 +193,8 @@ export default function Portfolio() {
     return () => window.removeEventListener("keydown", handleEscape);
   }, [activePopup]);
 
-  const activeProject = projects.find((p) => p.id === activePopup);
+  const activeIndex = projects.findIndex((p) => p.id === activePopup);
+  const activeProject = projects[activeIndex];
 
   return (
     <section
@@ -204,10 +234,15 @@ export default function Portfolio() {
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 450px"
               style={{ objectFit: "cover" }}
-              priority={project.id === "montagem-pc"}
+              priority={project.id === "ligno"}
             />
             <div className="portfolio-layer">
-              <h4>{project.title}</h4>
+              <h4>
+                {project.title}
+                {project.badge && (
+                  <span className="portfolio-badge">{project.badge}</span>
+                )}
+              </h4>
               <p>{project.summary}</p>
               <button
                 type="button"
@@ -226,86 +261,158 @@ export default function Portfolio() {
         {activeProject && (
           <motion.div
             key={`${activeProject.id}-popup`}
-            className="popup-overlay active"
+            className="modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             onClick={(event) => {
               if (event.target === event.currentTarget) closePopup();
             }}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={`popup-${activeProject.id}-title`}
           >
             <motion.div
-              className="popup-content"
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={`popup-${activeProject.id}-title`}
+              initial={{ opacity: 0, y: 32, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.98 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
               <button
                 type="button"
-                className="close-popup"
-                aria-label="Fechar popup"
+                className="modal__close"
+                aria-label="Fechar"
                 onClick={closePopup}
                 data-cur="fechar"
+                autoFocus
               >
-                ×
+                <i className="bx bx-x" aria-hidden="true"></i>
               </button>
-              <h4 id={`popup-${activeProject.id}-title`}>
-                {activeProject.popup.title}
-              </h4>
-              <p>{activeProject.popup.description}</p>
 
-              {activeProject.popup.endpoints && (
-                <ul>
-                  {activeProject.popup.endpoints.map((endpoint) => (
-                    <li key={endpoint}>
-                      <code>{endpoint}</code>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <div className="modal__media">
+                <Image
+                  src={activeProject.image}
+                  alt={activeProject.alt}
+                  fill
+                  sizes="(max-width: 860px) 100vw, 420px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
 
-              {activeProject.popup.examples && (
-                <>
-                  <h5>Exemplos com curl no PowerShell:</h5>
-                  {activeProject.popup.examples.map((example) => (
-                    <div key={example.label}>
-                      <p>{example.label}</p>
-                      <pre>
-                        <code>{example.code}</code>
-                      </pre>
+              <div className="modal__body">
+                <div className="modal__scroll" data-lenis-prevent>
+                  <span className="modal__eyebrow">
+                    Projeto {String(activeIndex + 1).padStart(2, "0")}
+                    {activeProject.badge && ` · ${activeProject.badge}`}
+                  </span>
+                  <h3
+                    id={`popup-${activeProject.id}-title`}
+                    className="modal__title"
+                  >
+                    {activeProject.popup.title}
+                  </h3>
+                  <p className="modal__text">
+                    {activeProject.popup.description}
+                  </p>
+
+                  {activeProject.popup.stack && (
+                    <ul className="modal__tags" aria-label="Tecnologias">
+                      {activeProject.popup.stack.map((tech) => (
+                        <li key={tech}>{tech}</li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {activeProject.popup.highlights && (
+                    <div className="modal__section">
+                      <h4 className="modal__label">Destaques técnicos</h4>
+                      <ul className="modal__notes">
+                        {activeProject.popup.highlights.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
-                  ))}
-                </>
-              )}
+                  )}
 
-              {activeProject.popup.notes && (
-                <>
-                  <h5>Observações:</h5>
-                  <ul>
-                    {activeProject.popup.notes.map((note) => (
-                      <li key={note}>{note}</li>
+                  {activeProject.popup.endpoints && (
+                    <div className="modal__section">
+                      <h4 className="modal__label">Endpoints</h4>
+                      <ul className="modal__endpoints">
+                        {activeProject.popup.endpoints.map((endpoint) => {
+                          const [method, path] = endpoint.split(" ");
+                          return (
+                            <li key={endpoint} className="modal__endpoint">
+                              <span
+                                className={`modal__method modal__method--${method.toLowerCase()}`}
+                              >
+                                {method}
+                              </span>
+                              <code>{path}</code>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
+
+                  {activeProject.popup.examples && (
+                    <div className="modal__section">
+                      <h4 className="modal__label">Exemplos com curl</h4>
+                      {activeProject.popup.examples.map((example) => (
+                        <div key={example.label} className="modal__code">
+                          <p className="modal__code-label">{example.label}</p>
+                          <pre>
+                            <code>{example.code}</code>
+                          </pre>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {activeProject.popup.notes && (
+                    <div className="modal__section">
+                      <h4 className="modal__label">Observações</h4>
+                      <ul className="modal__notes">
+                        {activeProject.popup.notes.map((note) => (
+                          <li key={note}>{note}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                {activeProject.popup.links?.length > 0 && (
+                  <div className="modal__footer">
+                    {activeProject.popup.links.map((link, index) => (
+                      <a
+                        key={link.href + link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`modal__action ${
+                          index === 0
+                            ? "modal__action--primary"
+                            : "modal__action--ghost"
+                        }`}
+                        data-cur="open"
+                      >
+                        {link.label}
+                        <i
+                          className={`bx ${
+                            link.icon ??
+                            (link.href.includes("github.com")
+                              ? "bxl-github"
+                              : "bx-link-external")
+                          }`}
+                          aria-hidden="true"
+                        ></i>
+                      </a>
                     ))}
-                  </ul>
-                </>
-              )}
-
-              {activeProject.popup.links?.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn"
-                  data-cur="open"
-                >
-                  {link.label}
-                </a>
-              ))}
+                  </div>
+                )}
+              </div>
             </motion.div>
           </motion.div>
         )}

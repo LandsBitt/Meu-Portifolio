@@ -12,7 +12,7 @@ const PROFILE_IMAGE = {
 
 const rotatingRoles = [
   "Desenvolvedor",
-  "Técnico em TI",
+  "Técnico de Software",
   "Back-End Java",
   "Front-End Web",
 ];
@@ -61,9 +61,8 @@ export default function Home() {
           Roland Bittencourt
         </motion.h1>
         <motion.h3 custom={2} initial="hidden" animate="visible" variants={cascade}>
-          Técnico de{" "}
-          <span>Montagem e manutenção de Computadores</span> e Graduando em{" "}
-          <span>Tecnologia em Análise e Desenvolvimento de sistemas</span>
+          Tecnólogo em <span>Análise e Desenvolvimento de Sistemas</span> e
+          Bacharelando em <span>Sistemas de Informação</span>
         </motion.h3>
 
         <motion.p
