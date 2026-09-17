@@ -32,7 +32,31 @@ export const metadata = {
     "manutenção de computadores",
     "Roland",
   ],
-  authors: [{ name: "Roland dos Santos" }],
+  authors: [{ name: "Roland Bittencourt" }],
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "/",
+    siteName: "Roland Bittencourt",
+    title: "Roland Bittencourt | Desenvolvedor de Software",
+    description:
+      "Desenvolvedor de Software. Tecnólogo em Análise e Desenvolvimento de Sistemas e bacharelando em Sistemas de Informação pela UNITAU.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Roland Bittencourt, Desenvolvedor de Software",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Roland Bittencourt | Desenvolvedor de Software",
+    description:
+      "Desenvolvedor de Software. Tecnólogo em ADS e bacharelando em Sistemas de Informação pela UNITAU.",
+    images: ["/og-image.png"],
+  },
   verification: {
     google: "PE8RRT1o04p-Iwes4VM3NZc4eu5tE3F2DyrATrq26bQ",
   },

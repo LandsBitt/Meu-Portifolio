@@ -133,10 +133,9 @@ export default function Home() {
           variants={cascade}
         >
           <a
-            href="https://drive.google.com/uc?export=download&id=1iCUbbQ-RUVfq2AUekSB5e4RQU1_ooWpW"
+            href="/Roland-Bittencourt-Curriculo.pdf"
             className="btn"
-            target="_blank"
-            rel="noopener noreferrer"
+            download="Roland-Bittencourt-Curriculo.pdf"
             data-cur="download"
           >
             Download CV

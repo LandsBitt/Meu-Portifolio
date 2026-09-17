@@ -85,7 +85,11 @@ const projects = [
         'Site do "Foco na Mente" (UNITAU) para promover saúde mental, com front-end em HTML, CSS e JavaScript. Inclui navegação, carrossel de vídeos, artigos e formulário com integração ao Telegram. Em breve, back-end com Java e banco de dados.',
       links: [
         { href: "https://unitau.br/foconamente/", label: "Ver Projeto" },
-        { href: "#", label: "Certificado" },
+        {
+          href: "/certificados/foco-na-mente-declaracoes.pdf",
+          label: "Declarações",
+          icon: "bx-file",
+        },
       ],
     },
   },

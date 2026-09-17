@@ -36,6 +36,28 @@ const education = [
   },
 ];
 
+const presentations = [
+  {
+    title: "Desenvolvedor voluntário · Projeto de Extensão Foco na Mente",
+    event: "UNITAU · 220 horas",
+    track: "Site institucional do projeto de saúde mental",
+    period: "ago 2024 — jul 2025",
+  },
+  {
+    title:
+      "Protótipo de aplicativo para localização e rotas em pontos turísticos de Tremembé-SP",
+    event: "XIV CICTED · UNITAU",
+    track: "Iniciação Científica (ENIC) · apresentação em painel",
+    period: "out 2025",
+  },
+  {
+    title: "Foco na Mente Tecnológico: relato de experiência do website",
+    event: "XIV CICTED · UNITAU",
+    track: "Projetos de Extensão (SEMEX) · apresentação em painel",
+    period: "out 2025",
+  },
+];
+
 const column = {
   hidden: { opacity: 0, y: 40 },
   visible: (i) => ({
@@ -113,6 +135,31 @@ export default function Journey() {
                 <p className="journey-period">
                   {item.period}
                   <em className="journey-badge">{item.status}</em>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </motion.div>
+
+        <motion.div
+          className="journey-card journey-card--wide"
+          custom={2}
+          variants={column}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <p className="journey-card__label">
+            <i className="bx bx-microphone" aria-hidden="true"></i> Extensão e apresentações
+          </p>
+          <ol className="journey-timeline journey-timeline--grid">
+            {presentations.map((item) => (
+              <li key={item.title}>
+                <h4>{item.title}</h4>
+                <p className="journey-meta">{item.event}</p>
+                <p className="journey-period">
+                  {item.track}
+                  <em className="journey-badge">{item.period}</em>
                 </p>
               </li>
             ))}

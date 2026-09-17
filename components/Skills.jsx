@@ -1,56 +1,119 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
-const skills = [
-  { icon: "bx bxl-java", label: "Java", levelClass: "java" },
-  { icon: "bx bxl-postgresql", label: "PostgreSQL", levelClass: "postgresql" },
-  { icon: "bx bxl-python", label: "Python", levelClass: "python" },
-  { icon: "bx bxl-html5", label: "HTML", levelClass: "html" },
-  { icon: "bx bxl-css3", label: "CSS", levelClass: "css" },
-  { icon: "bx bxl-javascript", label: "JavaScript", levelClass: "javascript" },
+const groups = [
+  {
+    title: "Linguagens",
+    icon: "bx bx-code-alt",
+    items: [
+      { label: "Java", icon: "bxl-java" },
+      { label: "JavaScript", icon: "bxl-javascript" },
+      { label: "TypeScript", icon: "bxl-typescript" },
+      { label: "C#" },
+      { label: "Python", icon: "bxl-python" },
+      { label: "SQL" },
+    ],
+  },
+  {
+    title: "Front-end",
+    icon: "bx bx-layout",
+    items: [
+      { label: "React", icon: "bxl-react" },
+      { label: "Next.js" },
+      { label: "Vite" },
+      { label: "Tailwind CSS", icon: "bxl-tailwind-css" },
+      { label: "HTML", icon: "bxl-html5" },
+      { label: "CSS", icon: "bxl-css3" },
+    ],
+  },
+  {
+    title: "Back-end e dados",
+    icon: "bx bx-data",
+    items: [
+      { label: "Node.js", icon: "bxl-nodejs" },
+      { label: "Express.js" },
+      { label: "APIs REST" },
+      { label: "PostgreSQL", icon: "bxl-postgresql" },
+      { label: "MySQL" },
+    ],
+  },
+  {
+    title: "DevOps",
+    icon: "bx bx-git-branch",
+    items: [
+      { label: "Git", icon: "bxl-git" },
+      { label: "GitHub", icon: "bxl-github" },
+      { label: "Docker", icon: "bxl-docker" },
+      { label: "Docker Compose" },
+      { label: "Nginx" },
+    ],
+  },
+  {
+    title: "Infraestrutura",
+    icon: "bx bx-server",
+    items: [
+      { label: "Linux (Ubuntu Server)", icon: "bxl-tux" },
+      { label: "Windows Server", icon: "bxl-windows" },
+      { label: "Active Directory" },
+      { label: "Hyper-V" },
+    ],
+  },
 ];
 
+const grid = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
+
+const card = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export default function Skills() {
-  const containerRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = containerRef.current;
-    if (!node) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section className="skills" id="skills" aria-labelledby="skills-title">
-      <h2 id="skills-title">
+      <motion.h2
+        id="skills-title"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
         Minhas <span>Habilidades</span>
-      </h2>
-      <div className="skills-container" ref={containerRef}>
-        {skills.map((skill, index) => (
-          <div
-            key={skill.label}
-            className={`skill-box${visible ? " is-visible" : ""}`}
-            style={{ transitionDelay: `${index * 70}ms` }}
-            data-cur="tech"
-          >
-            <i className={skill.icon} aria-hidden="true"></i>
-            <h3>{skill.label}</h3>
-            <div className={`progress-bar ${skill.levelClass}`}></div>
-          </div>
+      </motion.h2>
+
+      <motion.div
+        className="skills-grid"
+        variants={grid}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        {groups.map((group) => (
+          <motion.div key={group.title} className="skills-card" variants={card}>
+            <h3 className="skills-card__title">
+              <i className={group.icon} aria-hidden="true"></i>
+              {group.title}
+            </h3>
+            <ul className="skills-card__list">
+              {group.items.map((item) => (
+                <li key={item.label} className="skills-chip" data-cur="tech">
+                  {item.icon && (
+                    <i className={`bx ${item.icon}`} aria-hidden="true"></i>
+                  )}
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -61,18 +61,15 @@ export default function About() {
           variants={fadeUp}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          Desenvolvedor formado em <span>Análise e Desenvolvimento de Sistemas</span>
+          Do hardware ao <span>software</span>
         </motion.h1>
         <motion.p variants={fadeUp} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
-          Sou apaixonado por tecnologia, com facilidade para trabalhar em
-          equipe e me adaptar a novos desafios. Me formei Tecnólogo em Análise
-          e Desenvolvimento de Sistemas pela UNITAU em 2026 e sigo no
-          Bacharelado em Sistemas de Informação, com conclusão prevista para
-          2027. Atuo como Técnico de Software Júnior na Elec, onde comecei como
-          estagiário de TI. Tenho experiência em desenvolvimento web (Front-End
-          e Back-End), aplicações desktop com Java e PostgreSQL, e continuo
-          evoluindo em linguagens como Java e Python. Também faço montagem e
-          manutenção de computadores sob demanda.
+          Comecei na TI pelo hardware, montando e dando manutenção em
+          computadores, e hoje desenvolvo sistemas. Na Elec, entrei como
+          estagiário e fui efetivado como Técnico de Software Júnior, trabalhando
+          com Java e React. Sou formado em ADS pela UNITAU, sigo no bacharelado
+          em Sistemas de Informação e, no tempo livre, crio projetos próprios
+          como o Mochila Launcher e o Ligno.
         </motion.p>
       </motion.div>
     </section>
